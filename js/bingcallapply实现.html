@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+
+    // Function.prototype.call2 = function (context = window, ...args) {
+    //     context.fn = this;
+    //     let result = context.fn(...args);
+    //     delete context.fn;
+    //     return result;
+    // };
+
+    // var tObj = {
+    //     name: 'tino'
+    // }
+
+    // function func() {
+    //     console.log('this:', this)
+    //     console.log('name:', this.name)
+    // }
+
+    // func.call2(tObj)
+
+
+    // 用于改变函数this的对象
+    const obj = {
+        name: '张三'
+    };
+    // 带有返回值的测试函数
+    function sayHello(age, sex) {
+        console.log(`Hello ${this.name},age:${age},sex:${sex}`);
+        return {
+            name: this.name,
+            age: age,
+            sex: sex
+        }
+    }
+
+    Function.prototype.myApply = function (obj, arr) {
+        // 拿到obj，如果obj隐式转换是false，那么取window
+        const object = obj || window;
+        object.fun = this; // 上面已经测试过，this指向的是调用myApply方法的函数，这相当于在对象里创建了一个叫fun的函数，函数体是调用myApply方法的函数
+        let result; // 用于后续获取函数的返回值
+        if (arr) {
+            // 如果有参数，则将参数解构当作方法的参数
+            // 执行通过this绑定的方法，并拿到返回值，因为函数有可能会有返回值，所以需要接收。这里方法里的this已经指向object了，不明白可以看最下面第五大点。
+            console.log(...arr,'====arr')
+            result = object.fun(...arr);
+        } else {
+            result = object.fun();
+        }
+        delete object.fun; //  知识点3，对象是引用传递，我们不能改变传进来的参数，所以我们要从传进来的参数身上把我们通过this绑定的方法删除掉。
+        return result; // 返回执行函数的结果。
+    }
+
+
+    console.log(sayHello.myApply(undefined, [18, "男"]));
+
+
+
+
+
+</script>
