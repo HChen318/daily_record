@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+
+    class IncreasingCounter {
+        _count = 0;
+        constructor(x, y) {
+            this.name = 'ch'
+            this.x = x;
+            this.y = y;
+        }
+        get value() {
+            console.log("Getting the current value!");
+            return this._count;
+        }
+        increment() {
+            this._count++;
+        }
+        test() {
+
+        }
+    }
+
+    const counter = new IncreasingCounter(2, 3);
+    console.log("🚀 ~ counter", counter);
+    console.log(IncreasingCounter.prototype)
+    console.log(counter.__proto__)
+    console.log(IncreasingCounter.prototype === counter.__proto__)
+    // x和y都是实例对象point自身的属性（因为定义在this对象上），所以hasOwnProperty()方法返回true
+    counter.hasOwnProperty('x') // true
+    counter.hasOwnProperty('y') // true
+    console.log(counter.hasOwnProperty('x'));
+    console.log(counter.hasOwnProperty('y'));
+    console.log(counter.hasOwnProperty('_count'));
+
+    function a() {
+
+    }
+    console.log(a.prototype)
+</script>
