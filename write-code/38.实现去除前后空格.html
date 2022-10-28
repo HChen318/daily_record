@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function trim(str) {
+        if (!str) return str
+        if (typeof str !== 'string') return str
+        let reg = /^\s*|\s*$/g
+        return str.replace(reg, '')
+    }
+    const a = " aabb "
+    const b = trim(a)
+    console.log(b)
+    console.log(b === a)
+
+
+
+</script>

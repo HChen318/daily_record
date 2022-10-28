@@ -52,4 +52,16 @@
 
     }
     console.log(a.prototype)
+
+
+    class Foo {
+        f1() { console.log('this1', this) }
+        f2 = () => { console.log('this2', this) }
+        f3 = () => { console.log('this3', this) }
+        static f4() { console.log('this4', this) }
+    }
+
+    const f = new Foo()
+    console.log("~ f", f)
+    f.f1()
 </script>

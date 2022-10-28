@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>测试</div>
+</body>
+
+</html>
+<script>
+
+    function getUrlParams(urlKey) {
+        let params = window.location.search
+        params = params.slice(1)
+        let temSplit = params.split('&')
+        console.log(temSplit)
+        for (let i = 0; i < temSplit.length; i++) {
+            let [key, value] = temSplit[i].split('=')
+            if (key === urlKey) {
+                return value
+            }
+        }
+        return null
+    }
+
+    console.log(getUrlParams('name'))
+
+</script>

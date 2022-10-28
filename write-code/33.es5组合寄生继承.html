@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //用es5重写下面的代码，es5的组合寄生继承
+    // class Child {
+    //     constructor(name) {
+    //         this.name = name
+    //     }
+    //     say() {
+    //         console.log(1)
+    //     }
+    //     static hello() {
+    //     }
+    // }
+
+    // class Parent extends Child {
+    //     constructor(name) {
+    //         this.name = name
+    //     }
+    //     say() {
+    //         console.log(1)
+    //     }
+    //     static hello() {
+    //     }
+    // }
+
+    //es5重写
+    function Parent(name) {
+        this.name = name;
+    }
+    Parent.prototype.say = function () {
+        console.log(1)
+    }
+
+    Parent.hello = function () {}
+
+    function Child(name) {
+        Parent.call(this, name); //继承函数对象上的方法和属性
+        this.name = name;
+    }
+
+    Child.prototype = Object.create(Parent.prototype) //继承原型
+    Child.prototype.say = function () {
+        console.log(1)
+    }
+
+    Child.hello = function () {}
+
+
+
+
+</script>

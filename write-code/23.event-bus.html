@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+
+    class EventBus {
+        events = {
+        }
+
+        on(key, fn, isOnce = false) {
+            const event = this.events
+            if (!event[key]) event[key] = []
+            event[key].push({ fn, isOnce })
+        }
+
+        once(key, fn) {
+            this.on(key, fn, true)
+        }
+
+        emit(key, ...args) {
+            const cur = this.events[key]
+            if (cur.length) {
+                this.events[key] = cur.filter(ele => {
+                    ele.fn(...args)
+                    if (ele.isOnce) return false
+                    return true
+                })
+            }
+        }
+
+        off(key, fn) {
+            const cur = this.events[key]
+            if (!fn) {
+                this.events[key] = []
+            } else {
+                this.events[key] = cur.filter(ele => ele.fn !== fn)
+            }
+        }
+
+
+    }
+
+
+    const e = new EventBus()
+
+
+    function fn1(a, b) { console.log('fn1', a, b) }
+    function fn2(a, b) { console.log('fn2', a, b) }
+    function fn3(a, b) { console.log('fn3', a, b) }
+
+    e.on('key1', fn1)
+    e.on('key1', fn2)
+    e.once('key1', fn3)
+    e.on('xxxxxx', fn3)
+
+    e.emit('key1', 10, 20) // 触发 fn1 fn2 fn3
+    e.emit('key1', 11, 21) // 触发 fn1 fn2 fn3
+
+    e.off('key1', fn1)
+
+    e.emit('key1', 100, 200) // 触发 fn2
+
+
+
+</script>

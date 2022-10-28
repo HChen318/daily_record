@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    class LazyMan {
+        list = []
+        constructor(name) {
+            this.name = name
+            setTimeout(() => {
+                this.next()
+            })
+        }
+
+        next() {
+            const fn = this.list.shift()
+            if (fn) fn()
+        }
+
+        eat(val) {
+            const fn = () => {
+                console.log(`${this.name} eat`, `${val}`)
+                this.next()
+            }
+
+            this.list.push(fn)
+            return this
+        }
+
+        sleep(s) {
+            const fn = () => {
+                console.log(`${this.name} 开始睡觉`,)
+                setTimeout(() => {
+                    console.log(`${this.name} ${s}秒后已经睡完了`)
+                    this.next()
+                }, 1000 * s)
+            }
+
+            this.list.push(fn)
+            return this
+        }
+
+    }
+
+
+    const ch = new LazyMan('ch')
+    ch.eat('苹果').eat('香蕉').sleep(2).eat('橙子')
+
+</script>

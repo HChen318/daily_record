@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+    function switchLetter(str) {
+        if (!str) return
+
+        const reg1 = /[a-z]/ // 圆括号可以匹配多个连续的字符，而一对方括号只能匹配单个字符
+        const reg2 = /[A-Z]/ // 圆括号可以匹配多个连续的字符，而一对方括号只能匹配单个字符
+
+        let res = ""
+
+        for (let index = 0; index < str.length; index++) {
+            const val = str[index];
+            console.log(str[index], '=== str[index]')
+            if (reg1.test(val)) {
+                res += val.toUpperCase()
+            } else if (reg2.test(val)) {
+                res += val.toLowerCase()
+            } else {
+                res += val
+            }
+
+        }
+        return res
+
+    }
+
+    const str = '100aBcD$#xYz'
+    console.log(switchLetter(str))
+
+
+</script>

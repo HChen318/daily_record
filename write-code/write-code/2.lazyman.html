@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    class LasyMan {
+        arr = []
+        constructor(name) {
+            this.name = name
+            console.log(`HI! This is ${name}`)
+            setTimeout(() => {
+                this.next()
+            })
+        }
+        next() {
+            const fn = this.arr.shift()
+            if (fn) fn()
+        }
+        eat(value) {
+            const fn = () => {
+                console.log(`Eat ${value}`)
+                this.next()
+            }
+            this.arr.push(fn)
+            return this
+        }
+        sleep(s) {
+            const fn = () => {
+                setTimeout(() => {
+                    console.log(`Wake up after ${10}s`)
+                    this.next()
+                }, s * 1000)
+            }
+            this.arr.push(fn)
+            return this
+        }
+    }
+
+    const lazyman = new LasyMan('Hank')
+    lazyman.eat("“dinner”").eat("“supper”")
+
+
+    const a = [{ name: 'ch' }, { name: 'hex' }]
+
+    const b = a.filter(ele => {
+        if (ele.name === 'ch') {
+            return {
+                ...ele,
+                age: 18
+            }
+        }
+    })
+    console.log("b", b)
+
+
+</script>

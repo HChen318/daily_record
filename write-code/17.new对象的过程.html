@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    function myNew(construtor, ...args) {
+        const obj = Object.create(construtor.prototype)
+        construtor.apply(obj, args)
+        return obj
+    }
+
+    function Foo(name, age) {
+        this.name = name
+        this.age = age
+        this.getName = function () {
+
+        }
+    }
+
+    // class Foo {
+    //     // 属性
+    //     // name
+    //     // city
+    //     // n
+
+    //     constructor(name, n) {
+    //         this.name = name
+    //         this.city = '北京'
+    //         this.n = n
+    //     }
+
+    //     getName() {
+    //         return this.name
+    //     }
+    // }
+
+    // const f = new Foo('CH', 100)
+    const f = myNew(Foo, 'CH', 100)
+    console.info(f)
+    console.info(f.getName())
+
+
+
+
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 
+    function middle() {
+        let args = [...arguments]; //收集参数转为数组
+        args.sort() //排序
+        if (args.length % 2 === 0) { //判断数字个数是奇数还是偶数
+            return ((args[args.length / 2] + args[args.length / 2 - 1]) / 2);//偶数个取中间两个数的平均数
+        } else {
+            return args[parseInt(args.length / 2)];//奇数个取最中间那个数
+        }
+    }
+
+
+    function middle(arr) {
+        if (!arr || !arr.length) return
+        const length = arr.length
+        arr.sort()
+
+        if (length % 2 === 0) {
+            return ((arr[length / 2] + arr[length / 2 - 1]) / 2)
+        } else {
+            return arr[parseInt(length / 2)]
+        }
+
+    }
+
+    console.log(middle([1, 2, 3]))
+
+</script>

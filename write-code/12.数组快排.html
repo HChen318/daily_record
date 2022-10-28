@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    function quickSort(arr) {
+        if (!arr || !arr.length) return []
+
+
+        const middleIndex = Math.floor(arr.length / 2)
+        const middleValue = arr.splice(middleIndex, 1)[0]
+        console.log(middleIndex, '===')
+        console.log(middleValue, '===middleValue')
+        const length = arr.length
+        const leftArr = []
+        const rightArr = []
+        debugger
+        for (let index = 0; index < arr.length; index++) {
+            const val = arr[index];
+            if (middleValue < val) {
+                rightArr.push(val)
+            } else {
+                leftArr.push(val)
+            }
+        }
+
+        return quickSort(leftArr).concat([middleValue], quickSort(rightArr))
+    }
+
+
+    const arr1 = [1, 3, 3, 2, 4]
+    console.info(quickSort(arr1))
+
+
+</script>

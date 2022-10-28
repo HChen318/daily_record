@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    function createLink(arr) {
+        if (!arr || !arr.length) return null
+
+        let res = {
+            value: arr[arr.length - 1]
+        }
+
+        for (let index = arr.length - 2; index >= 0; index--) {
+            const value = arr[index];
+            res = {
+                value,
+                next: res
+            }
+        }
+        return res
+    }
+
+    const arr = [100, 200, 300, 400]
+
+    const res = createLink(arr)
+    console.log("res", res)
+
+    function revese(root) {
+        if (!root) return null
+
+        let pre = null
+        let cur = null
+        let next = root
+
+        while (next) {
+            if (!pre && cur) {
+                delete cur.next
+            }
+
+            if (pre && cur) {
+                cur.next = pre
+            }
+
+            pre = cur
+            cur = next
+            next = next?.next
+
+        }
+
+        cur.next = pre
+
+        return cur
+
+    }
+
+    console.log(revese(res), '===res')
+
+
+
+</script>

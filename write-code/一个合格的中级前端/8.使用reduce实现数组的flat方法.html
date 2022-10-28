@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // [1, 2, [3, 4]].flat()  // [1, 2, 3, 4]
+    // [1, 2, [3, [4, 5]]].flat()
+    // [1, 2, 3, [4, 5]]
+
+    // [1, 2, [3, [4, 5]]].flat(2)
+    // [1, 2, 3, 4, 5]  
+    //flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组，可以将flat()方法的参数写成一个整数，表示想要拉平的层数，默认为1。
+
+
+    const myFlat = function (depth = 1) {
+        const arr = Array.prototype.slice.call(this)
+        if (depth === 0) return arr
+        return arr.reduce((pre, cur, i) => {
+            if (Array.isArray(cur)) {
+                console.log(arguments, '==myFlat')
+                return [...pre, ...myFlat(cur, depth - 1)]
+            } else {
+                return [...pre, cur]
+            }
+        }, [])
+    }
+
+    Array.prototype.myFlat = myFlat
+
+    console.log([1, 2, [3, 4]].flat())
+
+
+    // [1, 2, 3, 4]
+
+
+</script>
