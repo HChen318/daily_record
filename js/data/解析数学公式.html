@@ -119,10 +119,10 @@
             return key;
         }
         function run(s) {
-
+            const regStr = /\(([^\(]+?)\)/g
             //子表达式
             if (/\(([^\(]+?)\)/.test(s)) {
-                s = s.replace(/\(([^\(]+?)\)/g, function (m, p1, p2) {
+                s = s.replace(regStr, function (m, p1, p2) {
                     return run(p1);
                 })
             }
@@ -135,7 +135,7 @@
                 return RegExp.$1;
             }
             //乘法、除法、加法、减法
-            const expArr = ['*', '/', '+', '-'];
+            const expArr = ['/', '*', '+', '-'];
             for (let i = 0; i < expArr.length; i++) {
                 const p = expArr[i];
                 const reg = new RegExp('(\\w+)[' + p + '](\\w+)');
@@ -153,9 +153,13 @@
         }
         return tempObj[run(formula)]
     }
-    const val = execMathExpress('a + b',
-        { 'a': 20, "b": 10 }
+
+    // a / b * 100
+    // a * 100 / b
+    const val = execMathExpress('a / b * 100',
+        { 'a': 3, "b": 10 }
     )
+    // den 分母
     console.log(val, '===val')
     const sum = val.num / val.den
     console.log(sum)
