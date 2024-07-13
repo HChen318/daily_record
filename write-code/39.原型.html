@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 对象继承
+    // 1.原型链继承  > 引用值共享
+    // 2.构造函数继承 > 没办法拿到原型上的方法
+    // 3.组合继承 > Super执行了2次
+    // 4.继生组合继承
+    // 5.圣杯模式继承
+
+
+    // 1.原型链继承 ==================  引用值共享
+    // function Super() {
+    //     // this.a = '111' //
+    //     this.a = [1, 2, 3, 4]
+    // }
+    // Super.prototype.say = function () {
+    //     console.log(2222)
+    // }
+
+    // function Sub() { }
+    // Sub.prototype = new Super()
+
+    // const sub1 = new Sub()
+    // const sub2 = new Sub()
+
+    // // sub1.a = '333'
+    // sub1.a.push(5)
+    // console.log(sub2.a)
+
+
+    // 2.构造函数继承 ================== 没办法拿到原型上的say方法
+    // function Super() {
+    //     this.a = [1, 2, 3, 4]
+    // }
+    // Super.prototype.say = function () {
+    //     console.log(2222)
+    // }
+
+    // function Sub() {
+    //     Super.call(this)
+    // }
+
+    // const sub1 = new Sub()
+    // const sub2 = new Sub()
+
+    // // sub1.a = '333'
+    // sub1.a.push(5)
+    // console.log(sub1.a)
+    // console.log(sub2.a)
+
+
+    // 3.组合继承 ================== Super构造函数执行了2次
+    // function Super() {
+    //     this.a = [1, 2, 3, 4]
+    // }
+    // Super.prototype.say = function () {
+    //     console.log(2222)
+    // }
+
+    // function Sub() {
+    //     Super.call(this)
+    // }
+    // Sub.prototype = new Super()  
+
+
+    // const sub1 = new Sub()
+    // const sub2 = new Sub()
+
+    // // sub1.a = '333'
+    // sub1.a.push(5)
+    // console.log(sub1.a)
+    // console.log(sub2.a)
+
+    // 4.继生组合继承 ================== 解决构造函数执行2次的的问题，会覆盖原型的方法
+    // function Super() {
+    //     this.a = [1, 2, 3, 4]
+    // }
+    // Super.prototype.say = function () {
+    //     console.log(2222)
+    // }
+
+    // function Sub() {
+    //     Super.call(this)
+    // }
+
+    // Sub.prototype = Object.create(Super.prototype) //继承原型
+
+    // const sub1 = new Sub()
+    // const sub2 = new Sub()
+
+    // // sub1.a = '333'
+    // sub1.a.push(5)
+    // console.log(sub1.a)
+    // console.log(sub2.a)
+
+    // 5.圣杯模式继承 ================== ???
+
+    //  为了son继承father原型上的东西，还可以修改自己原型上的东西，对father原型不影响。
+    // function inherit(Target, Origin) {
+    //     function F() { };// 函数F作为一个中间层，上连father，下连Son，使两函数互不干扰
+    //     F.prototype = Origin.prototype;
+    //     Target.prototype = new F();
+    //     Target.prototype.constuctor = Target;
+    //     // son原型归位
+    //     Target.prototype.uber = Origin.prototype;
+    // }
+    // Father.prototype.lastName = "Deng";
+    // function Father() { }
+    // function Son() { }
+    // inherit(Son, Father);
+    // // 运行函数，形参实参相统一
+    // var son = new Son();
+    // var father = new Father();
+
+
+
+</script>

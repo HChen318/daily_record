@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+    function moveZero1(arr) {
+        const length = arr.length
+        if (length === 0) return
+
+        let zeroLength = 0
+
+        for (let i = 0; i < arr.length - zeroLength; i++) {
+            const val = arr[i]
+            if (val === 0) {
+                arr.push(0)
+                arr.splice(i, 1)
+                i--
+                zeroLength++
+            }
+        }
+    }
+    const arr = [1, 0, 3, 4, 0, 0, 11, 0]
+    moveZero1(arr)
+    console.log(arr)
+
+
+    function moveZero2(arr) {
+        const length = arr.length
+        if (length === 0) return
+
+        let i
+        let j = -1
+
+        for (i = 0; i < length; i++) {
+            if (arr[i] === 0) {
+                if (j < 0) {
+                    j = i
+                }
+            }
+
+            if (arr[i] != 0 && j >= 0) {
+                const n = arr[i]
+
+                arr[i] = arr[j]
+
+                arr[j] = n
+                j++
+            }
+        }
+    }
+
+
+    moveZero2(arr)
+    console.log(arr)
+
+
+
+</script>

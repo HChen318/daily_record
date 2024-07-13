@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+</head>
+
+<body>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<button onclick="test()">刷新个人中心</button>
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<button onclick="test1()">跳转财经</button>
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<br />
+	<button onclick="test2()">财富值弹框</button>
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+	<input />
+	<br />
+
+	<script>
+		function test() {
+			// IOS
+			// window.webkit.messageHandlers.al_jsCloseCurrentFinanceWebview.postMessage([])
+			// 安卓
+			// window.InstallmentJsObj.al_jsNotifyRefreshDailyTask([])
+			window.InstallmentJsObj.al_jsUpdateUserInfo([])
+		}
+
+		function test1() {
+			// IOS
+			// window.webkit.messageHandlers.al_jsCloseCurrentFinanceWebview.postMessage([])
+			// 安卓
+			window.InstallmentJsObj.al_jsGoFinanceTab([])
+		}
+
+		function test2() {
+			// IOS
+			// window.webkit.messageHandlers.al_jsCloseCurrentFinanceWebview.postMessage([])
+			// 安卓
+			window.InstallmentJsObj.al_jsShowRewardDialog(['{"wealth":"1111"}'])
+		}
+
+		// function xxx() {
+		// 	window.testNewWebview = id => {
+		// 		console.log("isClose:", id)
+		// 	}
+		// 	// IOS
+		// 	// window.webkit.messageHandlers.al_jsCreateFinanceWebview.postMessage(
+		// 	//  ['{"newWebview":"http://10.0.194.43:5501/new_file.html","callbackName":"testNewWebview(32432432,43543534)"}']
+		// 	// )
+
+		// 	window.InstallmentJsObj.al_jsCreateFinanceWebview(
+		// 		['{"newWebview":"http://10.0.194.43:5501/new_file.html","callbackName":"testNewWebview(32432432,43543534)"}']
+		// 	)
+		// 	//				window.open("web/128410364080657408.pdf")
+		// 	//				window.location.href = "web/128410364080657408.pdf"
+		// }
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+
+    function myInstanceof(instance, origin) {
+
+        if (!instance) return null
+        if (typeof instance !== 'object' && typeof instance !== 'function') return null
+
+        let temInstance = instance
+
+        while (temInstance) {
+
+            if (temInstance.__proto__ === origin.prototype) {
+                return true
+            }
+
+            temInstance = temInstance.__proto__
+
+
+        }
+        return false
+    }
+
+
+    console.info(myInstanceof({}, Object))
+    console.info(myInstanceof([], Object))
+    console.info(myInstanceof([], Array))
+    console.info(myInstanceof({}, Array))
+    console.info(myInstanceof('abc', String))
+
+
+
+</script>

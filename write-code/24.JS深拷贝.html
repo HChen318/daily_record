@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+
+
+    function cloneDeep(obj, map = new WeakMap()) {
+        if (typeof obj !== 'object' || obj == null) return obj
+        // 避免循环引用
+        const objFromMap = map.get(obj)
+        if (objFromMap) {
+            console.log(objFromMap, '==objFromMap')
+            return objFromMap
+        }
+
+        let target = {}
+        map.set(obj, target)
+
+        // Map
+        if (obj instanceof Map) {
+            target = new Map()
+            obj.forEach((v, k) => {
+                const v1 = cloneDeep(v, map)
+                const k1 = cloneDeep(k, map)
+                target.set(k1, v1)
+            })
+        }
+
+        // Set
+        if (obj instanceof Set) {
+            target = new Set()
+            obj.forEach(v => {
+                const v1 = cloneDeep(v, map)
+                target.add(v1)
+            })
+        }
+
+        // Array
+        if (obj instanceof Array) {
+            target = obj.map(item => cloneDeep(item, map))
+        }
+
+        // Object
+        for (const key in obj) {
+            const val = obj[key]
+            const val1 = cloneDeep(val, map)
+            target[key] = val1
+        }
+
+        return target
+    }
+
+
+    // // 功能测试
+    // const a = {
+    //     // set: new Set([10, 20, 30]),
+    //     // map: new Map([['x', 10], ['y', 20]]),
+    //     // info: {
+    //     //     city: '北京'
+    //     // },
+    //     // fn: () => { console.info(100) }
+    //     b: 1
+    // }
+    // a.self = a
+    // console.log(cloneDeep(juejin))
+
+    // test
+    const seven = {
+        name: 'seven'
+    }
+    const juejin = {
+        name: 'juejin',
+        relative: seven
+    }
+    seven.relative = juejin
+    const newObj = cloneDeep(seven)
+    console.log(newObj)
+    // { name: 'seven', relative: { name: 'juejin', relative: null } }
+
+
+    // function cloneDeep1(arr) {
+    //     const map = new Map
+    //     function _deep(target) {
+    //         if (!Array.isArray(target)) return target
+
+    //         if (map.get(target)) return map.get(target)
+
+    //         const { length } = target
+    //         const result = new Array(length)
+
+    //         map.set(target, result)
+
+    //         let index = -1
+    //         while (++index < length) {
+    //             result[index] = _deep(target[index])
+    //         }
+    //         return result
+    //     }
+    //     return _deep(arr)
+    // }
+
+    // const a = {
+    //     // set: new Set([10, 20, 30]),
+    //     // map: new Map([['x', 10], ['y', 20]]),
+    //     // info: {
+    //     //     city: '北京'
+    //     // },
+    //     // fn: () => { console.info(100) }
+    //     b: 1
+    // }
+    // a.self = a
+    // console.log(cloneDeep1(a))
+
+
+    function cloneDeep2(obj, map = new WeakMap()) {
+
+        if (!obj || typeof obj != 'object') return obj
+
+        const val = map.get(obj)
+        if (val) return val
+
+        let target = {}
+        map.set(obj, target)
+
+        if (obj instanceof Map) {
+            target = new Map()
+            obj.forEach((k, v) => {
+                const k1 = cloneDeep(k, map)
+                const v1 = cloneDeep(v, map)
+                target.set(k1, v1)
+            })
+        }
+        if (obj instanceof Set) {
+            target = new Set()
+            obj.forEach((v) => {
+                const v1 = cloneDeep(v, map)
+                target.set(v1)
+            })
+        }
+
+        if (obj instanceof Array) {
+            target = obj.map(ele => cloneDeep(v, map))
+        }
+
+        for (let key in obj) {
+            target[key] = cloneDeep(obj[key], map)
+        }
+
+        return target
+
+
+
+    }
+
+    const a = {
+        set: new Set([10, 20, 30]),
+        map: new Map([['x', 10], ['y', 20]]),
+        info: {
+            city: '北京'
+        },
+        fn: () => { console.info(100) },
+    }
+    a.self = a
+    console.log(cloneDeep2(a))
+
+
+
+</script>

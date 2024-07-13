@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    Array.prototype.myMap = function (fn, context) {
+        const arr = Array.prototype.slice.call(this)
+        const newArr = arr.reduce((pre, cur, i) => {
+            return [...pre, fn.call(context, cur, i, this)]
+        }, [])
+        return newArr
+    }
+
+    const a = [1, 2, null, 4]
+
+    const c = a.myMap((ele, i, origin) => {
+        return ele * 2
+    })
+    console.log("c", c)
+
+
+</script>

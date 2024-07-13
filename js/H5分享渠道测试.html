@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="whatsapp:url" class="share_url" content="http://www.baidu.com">
+    <meta name="whatsapp:title" class="share_title" content="测试分享到whatsapp内容">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="javascript:whatsApp();" class="xq-whatsapp" data-action="share/whatsapp/share">instagram</a>
+
+</body>
+<script>
+    // (function (d, s, id) {
+    //         var js, fjs = d.getElementsByTagName(s)[0];
+    //         if (d.getElementById(id)) return;
+    //         js = d.createElement(s); js.id = id;
+    //         //下面填入一个你的app id，如果还没，请在fb开发者平台注册一个
+    //         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=943837722395618";
+    //         fjs.parentNode.insertBefore(js, fjs);
+    //     }(document, 'script', 'facebook-jssdk'));
+
+
+    // (function (d, s, id) {
+    //     var js, fjs = d.getElementsByTagName(s)[0];
+    //     if (d.getElementById(id)) { return; }
+    //     js = d.createElement(s); js.id = id;
+    //     js.src = "//connect.facebook.net/en_US/sdk.js";
+    //     fjs.parentNode.insertBefore(js, fjs);
+    // }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+</html>
+<script>
+
+
+
+    function whatsApp(contentId) {
+
+        //schema
+
+        u = document.getElementsByClassName("share_url")[0].content;
+
+        t = document.getElementsByClassName("share_title")[0].content;
+
+        const text = encodeURIComponent(t) + encodeURIComponent("\n" + u)
+
+        // whatapp ok
+        // location = "whatsapp://send?text=" + encodeURIComponent(t) + encodeURIComponent("\n\n" + u) + "&via=lopscoop";
+
+        // 电报ok
+        // location = "tg://msg?text=" + encodeURIComponent(t) + encodeURIComponent("\n\n" + u)
+
+        // 推特 暂时ok 只能分享到对方
+        // location = "twitter://messages/compose?text=" + text
+        // location = "twitter://intent/tweet?text=12121"
+
+        // <a href="twitter://post?text=Hello%20world" target="_blank">share-twitter</a
+
+
+        // let metaParams = metaArr.toString()
+        // window.open('fb://sharer?u=' + encodeURIComponent(`http://java.chendahai.cn/share/new?meta=${metaParams}`))
+
+        // facebook
+        // location = `fb://feed?text=${t}`
+        // location = `fb://sharer?u=` + encodeURIComponent(u)
+        // fb-messenger://share/?link=[yourShareURL]
+
+
+
+        // var shareToFbBtn = document.getElementById('fb-btn');
+        // console.log(FB, '===FB')
+        // FB.ui({
+        //     method: 'share',
+        //     href: "https://www.baidu.com/", //这里换成你的网址
+        //     quote: '121212'
+        // }, function (response) {
+        //     //分享回调
+        // })
+
+        // fb://faceweb/f?href=%2Fmessages?src=fb4a
+
+        // shareToFbBtn.onclick = function () {
+
+        // }
+        // location = `fb://faceweb/f?href=%2Fmessages?quote=2222`
+        // location = `fb://post?message=helloworld`
+
+
+        // let metaArr = [
+        //     'og:url', 'http://java.chendahai.cn',
+        //     'og:title', 'this is title',
+        //     'og:description', 'this is desc',
+        //     'og:image', 'http://gg.chendahai.cn/static/image/apple.jpg',
+        //     'og:type', 'website'
+        // ]
+        // let metaParams = metaArr.toString()
+        // fb分享网页可以 
+        // window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(`https://www.baidu.com/`))
+        // window.location.replace(
+        //     `https://www.facebook.com/sharer.php?u=${encodeURIComponent(u)}&quote=${encodeURIComponent(t)}`
+        // );
+        // location = `fb://me/feed/post?u=${encodeURIComponent(`https://www.baidu.com/`)}`
+        // location = "www.facebook.com/dialog/send?app_id=943837722395618"
+
+
+        // var name = 'your-name';
+        // var caption = 'your-caption';
+        // var description = 'your-description';
+        // var message = 'share-message';
+        // var picture = "http://www.xxx.xxx/img/xxx.gif";
+        // var link = "http://www.xxx.xxx";
+        // console.log(FB,'==FB')
+        // FB.api('/me/feed', 'post',
+        //     { caption: caption, name: name, description: description, picture: picture, link: link, message: message, type: "photo" },
+        // );
+
+
+
+
+
+
+        // const text = t + u
+        // console.log(text, '==text')
+        // messenger // 成功一半没能分享内容 
+        // location = "fb-messenger://share/?link=https%3A%2F%2Fwww.baidu111.com&text=111"
+        // location = "fb-messenger://share/?link=" + encodeURIComponent(u)
+
+        // fb-messenger://share/?link= https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fsharing%2Freference%2Fsend-dialog&app_id=123456789
+
+
+        // sms ok 
+        // Android
+        // location = `sms:${ '' }?body = ${ t + '\n' + u } `
+        // ios 
+        //   'sms:' + phone + '&body='+name;//ios  ///
+        // location = `sms:${ '' }& body=${ t + '\n' + u } `
+
+
+        // line
+        location = `line://msg/text/?${111}`
+
+ 
+        //  instagram
+        // location = `instagram://app`
+
+    }
+
+</script>

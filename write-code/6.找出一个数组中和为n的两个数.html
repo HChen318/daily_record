@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+    function findTotleNumber(arr, n) {
+        if (!arr || !arr.length) return false
+        const res = []
+
+        const length = arr.length
+        let i = 0;
+        let j = length - 1
+
+        while (i <= j) {
+            const n1 = arr[i]
+            const n2 = arr[j]
+            const sum = n1 + n2
+
+            if (sum > n) {
+                j--
+            } else if (sum < n) {
+                i++
+            } else {
+                res.push(n1, n2)
+                break
+            }
+        }
+
+        return res
+    }
+
+    console.log(findTotleNumber([1, 2, 4, 7, 11, 15], 15));
+
+</script>

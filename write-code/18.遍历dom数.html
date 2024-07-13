@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <p>hello <b>world</b></p>
+        <img src="https://www.baidu.com/img/flexible/logo/pc/result.png" />
+        <!-注释->
+            <ul>
+                <li>a</li>
+                <li>b</li>
+            </ul>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+
+    function visitNode(n) {
+        // 注释
+        if (n instanceof Comment) {
+            console.log('common node ==', n.textContent)
+        }
+
+        // 文本
+        if (n instanceof Text) {
+            const val = n.textContent.trim()
+            if (val) {
+                console.log('Text node===', n.textContent)
+            }
+        }
+
+        // 标签
+        if (n instanceof HTMLElement) {
+            console.log('ele ===', n.tagName)
+        }
+    }
+
+
+    // 深度遍历
+    function deep(root) {
+        visitNode(root)
+        const childNodes = root.childNodes
+        if (childNodes.length) {
+            childNodes.forEach(ele => deep(ele))
+        }
+    }
+
+    // 广度遍历
+    function traverse(root) {
+
+        if (!root) return
+        const arr = []
+        arr.unshift(root)
+
+        while (arr.length > 0) {
+            const cur = arr.pop()
+            if (!cur) break
+            visitNode(cur)
+            const childNodes = cur.childNodes
+
+            if (childNodes.length) {
+                childNodes.forEach(ele => arr.unshift(ele))
+            }
+
+        }
+
+    }
+
+
+
+    const box = document.getElementById('box')
+    deep(box)
+
+    console.log('====traverse')
+    console.log(traverse(box))
+
+
+
+
+</script>

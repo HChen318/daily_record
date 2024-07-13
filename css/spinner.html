@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div id="spinner" class="show">
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            #spinner {
+                background: #fff;
+                position: absolute;
+                z-index: 1000;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                transition: opacity 0.3s;
+                -webkit-transition: opacity 0.3s;
+            }
+
+            #spinner.show {
+                opacity: 1;
+            }
+
+            #spinner.hide {
+                opacity: 0;
+            }
+
+            #spinner .spinner {
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translate3d(-50%, -50%, 0);
+                transform: translate3d(-50%, -50%, 0);
+            }
+
+            .circle {
+                box-sizing: border-box;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid lightgray;
+                border-left-color: #333;
+                -webkit-animation: loader_rotate 1s linear infinite;
+                animation: loader_rotate 1s linear infinite;
+                display: none;
+            }
+
+            .start-animation {
+                display: none;
+                text-align: center;
+            }
+
+            @-webkit-keyframes loader_rotate {
+                from {
+                    transform: rotate(0);
+                    -webkit-transform: rotate(0);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @keyframes loader_rotate {
+                from {
+                    transform: rotate(0);
+                    -webkit-transform: rotate(0);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+        </style>
+</head>
+
+<body>
+
+    <div class="spinner">
+        <div id="startCircle" class="circle"></div>
+    </div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.getElementById('startCircle').style.display = 'block'
+    setTimeout(function () {
+        var spinner = document.getElementById('spinner')
+        if (window.__SSR__) {
+            spinner.parentNode.removeChild(spinner)
+            return
+        }
+        function func() {
+            //loading（正在加载）interactive（可交互）complete（完成）
+            if (document.readyState === 'complete') {
+                spinner.className = 'hide'
+                setTimeout(function () {
+                    spinner.parentNode.removeChild(spinner)
+                }, 1000)
+                document.removeEventListener('readystatechange', func)
+            }
+        }
+        document.addEventListener('readystatechange', func)
+    })
+
+</script>

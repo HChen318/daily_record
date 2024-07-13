@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function createLinkList(arr) {
+        if (!arr || !arr.length) return false
+
+        const length = arr.length
+        let curNode = {
+            val: arr[length - 1]
+        }
+        if (length === 0) return curNode
+        for (let i = length - 2; i >= 0; i--) {
+            curNode = {
+                val: arr[i],
+                next: curNode
+            }
+        }
+
+        return curNode
+    }
+
+    const arr = [100, 200, 300, 400, 500]
+    const list = createLinkList(arr)
+    console.info('list:', list)
+
+    function reverseList(curNode) {
+
+        if (!curNode) return
+
+        let pre = null
+        let cur = null
+        let next = curNode
+
+        while (next) {
+            if (!pre && cur) {
+                delete cur.next
+            }
+
+            if (pre && cur) {
+                cur.next = pre
+            }
+
+            pre = cur
+            cur = next
+            next = next?.next
+        }
+
+        cur.next = pre
+
+        return cur
+
+    }
+
+    console.log(reverseList(list));
+
+</script>

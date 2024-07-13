@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+    function match(l, r) {
+        if (l === '{' && r === '}') {
+            return true
+        } else if (l === '[' && r === ']') {
+            return true
+        } else if (l === '(' && r === ')') {
+            return true
+        }
+
+        return false
+    }
+
+
+    function matchBrackte(str) {
+        if (!str || !str.length) return false
+
+        const stack1 = []
+
+        const leftBracket = "{[("
+        const rightBracket = "}])"
+
+        for (let i = 0; i < str.length; i++) {
+            const val = str[i]
+            if (leftBracket.includes(val)) {
+                stack1.push(val)
+            } else if (rightBracket.includes(val)) {
+                const n = stack1[stack1.length - 1]
+                if (match(n, val)) {
+                    stack1.pop()
+                } else {
+                    return false
+                }
+            }
+        }
+        return stack1.length === 0
+    }
+
+    const str = "({[}})"
+
+    console.log(matchBrackte(str));
+
+
+</script>

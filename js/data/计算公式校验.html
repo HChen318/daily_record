@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    (function () {
+        /*
+         * 假如待选变量：  ID,NUM,TOTAL，AVL TEST
+         * 正确的公式例子：ID*NUM+(TOTAL/AVL)*0.5 
+         * 错误的公式例子：ID**|0.5
+         */
+
+        function fn(string, obj) {// TODO: 如何处理=？
+            // 剔除空白符
+            string = string.replace(/\s/g, '');
+
+            // 错误情况，空字符串
+            if ("" === string) {
+                return false;
+            }
+
+            // 错误情况，运算符连续
+            if (/[\+\-\*\/]{2,}/.test(string)) {
+                return false;
+            }
+
+            // 空括号
+            if (/\(\)/.test(string)) {
+                return false;
+            }
+
+            // 错误情况，括号不配对
+            var stack = [];
+            for (var i = 0, item; i < string.length; i++) {
+                item = string.charAt(i);
+                if ('(' === item) {
+                    stack.push('(');
+                } else if (')' === item) {
+                    if (stack.length > 0) {
+                        stack.pop();
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            if (0 !== stack.length) {
+                return false;
+            }
+
+            // 错误情况，(后面是运算符 
+            if (/\([\+\-\*\/]/.test(string)) {
+                return false;
+            }
+
+            // 错误情况，)前面是运算符
+            if (/[\+\-\*\/]\)/.test(string)) {
+                return false;
+            }
+
+            // 错误情况，(前面不是运算符
+            if (/[^\+\-\*\/]\(/.test(string)) {
+                return false;
+            }
+
+            // 错误情况，)后面不是运算符
+            if (/\)[^\+\-\*\/]/.test(string)) {
+                return false;
+            }
+
+            // 错误情况，变量没有来自“待选公式变量”
+            var tmpStr = string.replace(/[\(\)\+\-\*\/]{1,}/g, '`');
+            var array = tmpStr.split('`');
+            console.log(array, '===array')
+            for (var i = 0, item; i < array.length; i++) {
+                item = array[i];
+                console.log(item, '[===item')
+                if (/[A-Z]/i.test(item) && 'undefined' === typeof (obj[item])) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // 测试
+        var fields = {
+            'a': 'a',
+            'b': 'b',
+            'c': 'c',
+            'NUM': 'NUM'
+        };
+        // 提交到服务器端的字符串不应该包含空白符，或者应该禁止用户输入空白符
+        alert(fn('a+(b/c)*0.5 + 25', fields));
+    });
+
+    var c = { a: 1 }
+    var arr = [
+        { key: 'a', value: "Flat HC" },
+        { key: 'b', value: "Inc HC" }
+    ]
+
+    var str = 'a + b'
+
+    var str1 = ''
+
+    const nameMap = new Map()
+    const nameObj = {}
+
+    arr.forEach(e => {
+        nameMap.set(e.key, e.value)
+    })
+    let res = ''
+    for (let i = 0; i < str.length; i++) {
+        const e = str[i];
+        if (nameMap.get(e)) {
+            res += nameMap.get(e)
+        } else {
+            res += e
+        }
+    }
+
+    console.log(res, '===res')
+
+
+    const baseColumn = ["Flat HC", "Inc HC", "Flat HC", 'aa']
+    // 从这样的的字符串 解析成 a + b +c
+    let str2 = "Flat HC+Inc HC*Flat HC + aa"
+    const replaceVariable = ['a', 'b', 'c', 'd', 'e']
+    var storageObj = {
+
+    }
+
+    let correctFormula = ''
+
+    baseColumn.forEach((ele, i) => {
+        if (str2.includes(ele)) {
+            if (storageObj[ele]) {
+                if (correctFormula) {
+                    correctFormula = correctFormula.replace(ele, storageObj[ele])
+                } else {
+                    correctFormula = str2.replace(ele, storageObj[ele])
+                }
+            } else {
+                storageObj[ele] = replaceVariable[i]
+                if (correctFormula) {
+                    correctFormula = correctFormula.replace(ele, replaceVariable[i])
+                } else {
+                    correctFormula = str2.replace(ele, replaceVariable[i])
+                }
+            }
+        }
+    })
+
+    const dataOri = {
+        "Flat HC": 20,
+        "Inc HC": 10,
+        aa: 10
+    }
+    var obj = {}
+    for (const key in storageObj) {
+        obj[storageObj[key]] = dataOri[key]
+    }
+    console.log(obj, '==obj')
+    console.log(storageObj, '===storageObj')
+    console.log(str3, '===str3')
+
+
+</script>

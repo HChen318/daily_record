@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    class MyQueue {
+        stack1 = []
+        stack2 = []
+
+        add(val) {
+            this.stack1.push(val)
+        }
+
+        delete() {
+            const stack1 = this.stack1
+            const stack2 = this.stack2
+
+            while (stack1.length) {
+                const n = stack1.pop()
+                stack2.push(n)
+            }
+
+            const val = stack2.pop()
+            while (stack2.length) {
+                const n = stack2.pop()
+                stack1.push(n)
+            }
+
+            return val
+
+        }
+
+        get length() {
+            return this.stack1.length
+        }
+
+
+    }
+    const q = new MyQueue()
+    q.add(100)
+    q.add(200)
+    q.add(300)
+    console.info(q.length)
+    console.info(q.delete())
+    console.info(q.length)
+    console.info(q.delete())
+    console.info(q.length)
+
+</script>

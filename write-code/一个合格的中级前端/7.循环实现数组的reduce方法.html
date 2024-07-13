@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    var numbers = [1, 44, 12, 4];
+
+    const res = numbers.reduce((total, currentValue, currentIndex, arr) => {
+        return total + currentValue;
+    }, 0)
+    console.log("res", res)
+
+    Array.prototype.myReduce = function (fn, initialValue) {
+        const arr = Array.prototype.slice.call(this)
+        let i = 0;
+        let res;
+
+        if (!initialValue) {
+            for (let j = 0; j < arr.length; j++) {
+                if (!arr.hasOwnProperty(i)) continue  // 因为可能存在稀疏数组的关系，所以 reduce 需要保证跳过稀疏元素
+                i = j   // 如果没有初始值 reduce pre是第一项 i从1开始
+                res = arr[j]
+                break
+            }
+        } else {
+            res = initialValue
+        }
+
+        for (; i < arr.length; i++) {
+            if (!arr.hasOwnProperty(i)) continue
+            res = fn.call(null, res, arr[i], i, this)
+        }
+
+        return res
+    }
+
+    const res1 = numbers.reduce((total, currentValue, currentIndex, arr) => {
+        return total + currentValue;
+    }, 0)
+    console.log("res1", res1)
+
+
+
+
+</script>

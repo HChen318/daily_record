@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    const a = [1, 2, null, 4]
+
+    // map使用2个参数 
+    // function(currentValue, index,arr)	,
+    // thisValue 对象作为该执行回调时使用，传递给函数，用作 "this" 的值。如果省略了 thisValue，或者传入 null、undefined，
+    // 那么回调函数的 this 为全局对象
+    const b = a.map((ele, i, origin) => {
+        // console.log(ele, i, origin)
+        return ele * 2
+    })
+
+    console.log("b", b)
+
+    Array.prototype.myMap = function (fn, context) {
+        const arr = Array.prototype.slice.call(this)  //不改变原数组
+        const mapArr = new Array(this.length)
+        for (let i = 0; i < this.length; i++) {
+            if (!arr.hasOwnProperty(i)) {  //  // 稀疏数组，跳出当前循环 new Array(3)
+                continue
+            }
+            mapArr[i] = fn.call(context, arr[i], i, this) //方法的三个参数，currentValue, 当前下标， 当前数组
+        }
+        return mapArr
+    }
+
+    const c = a.myMap((ele, i, origin) => {
+        return ele * 2
+    })
+    console.log(a, '===a')
+    console.log("b", c)
+
+
+
+</script>

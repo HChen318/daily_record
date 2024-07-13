@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+    const p = new Promise((resolve, reject) => {
+        resolve(1)
+    })
+    p.then(res => {
+        // console.log(res, '===res=')
+    })
+
+
+    class MyPromise {
+        constructor(exec) {
+            this.state = 'pending'
+            this.resolveVal = undefined
+            this.rejectedInfo = undefined
+            this.onResolveCallback = []
+            this.onRejectedCallback = []
+
+            let resolve = (val) => {
+                setTimeout(() => {
+                    if (this.state === 'pending') {
+                        this.state = 'fulfilled'
+                        this.resolveVal = val
+                    }
+                    if (this.onResolveCallback && this.onResolveCallback.length) {
+                        this.onResolveCallback.forEach(fn => fn())
+                    }
+                });
+
+            }
+            let reject = (reason) => {
+                setTimeout(() => {
+                    if (this.state === 'pending') {
+                        this.state = 'rejected'
+                        this.rejectedInfo = reason
+                        if (this.onRejectedCallback && this.onRejectedCallback.length) {
+                            this.onResolveCallback.forEach(fn => fn())
+                        }
+                    }
+                })
+            }
+
+            try {
+                exec(resolve, reject)
+            } catch (err) {
+                reject(err)
+            }
+        }
+
+        then(onFulFilled, onRejected) {
+            onFulFilled = typeof onFulFilled === 'function' ? onFulFilled : () => { }
+            onRejected = typeof onFulFilled === 'function' ? onRejected : () => { }
+            let promise2 = new MyPromise((resolve, reject) => {
+                if (this.state === 'pending') {
+                    this.onResolveCallback.push(() => {
+                        setTimeout(() => {
+                            onFulFilled(this.resolveVal)
+                        });
+                    })
+                    this.onRejectedCallback.push(() => {
+                        setTimeout(() => {
+                            onRejected(this.rejectedInfo)
+                        })
+                    })
+                }
+
+                if (this.state === 'fulfilled') {
+                    let x = onFulFilled(this.resolveVal)
+                    console.log(resolve, '===resolve')
+                    resolve(x)
+                }
+
+                if (this.state === 'rejected') {
+                    const y = onRejected(this.rejectedInfo)
+                }
+            })
+            return promise2
+        }
+    }
+
+    console.log('第一步')
+    const p1 = new MyPromise((resolve, reject) => {
+        console.log('第二步')
+        // setTimeout(() => {
+        //     resolve('promise resolve')
+        //     console.log('第四步')
+        // }, 1000);
+        resolve(200)
+    })
+    // console.log("~ p1", p1)
+    p1.then(res => {
+        console.log(res, '==res')
+        return 300
+    }).then(data => {
+        console.log(data, '==data')
+    })
+    console.log('第三步')
+</script>
